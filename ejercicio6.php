@@ -19,17 +19,21 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $usuario = $_POST["usuario"];
-        $contraseña = $_POST["contraseña"];
-        $contraseñaEncriptada = password_hash($contraseña, PASSWORD_DEFAULT);
+        $contraseña = $_POST["contrasenia"];
 
-        getUser($usuario);
+        $datos = getUser($usuario);
 
-        if(password_verify($contraseña,$contraseñaEncriptada)){
+        if ($datos) {
+            $contraseñaEncriptada = $datos["contrasenia"];
+            $retorno = password_verify($contraseña, $contraseñaEncriptada);
+            if ($retorno) {
+                echo "la contraseña es correcta";
+            } else {
+                echo "la contraseña es incorrecta.";
+            }
+        } else {
 
-            echo "la contraseña es correcta";
-        }else{
-
-            echo "la contraseña es incorrecta.";
+            echo "el usuario o la contraseña es incorrecto.";
         }
     }
 
@@ -42,7 +46,7 @@
         <h2>Banco2</h2>
         <div>
             <input type="text" name="usuario" placeholder="NombreUsuario" required>
-            <input type="password" name="contraseña" placeholder="Contraseña" required>
+            <input type="password" name="contrasenia" placeholder="Contrasenia" required>
             <input type="submit" value="Registrar">
         </div>
     </form>
