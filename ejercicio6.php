@@ -5,52 +5,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Crea usuario</title>
 </head>
 
-<body>
-
-    <?php
-
+<?php
     include "ejercicio6BBDD.php";
-
-    $usuario = "";
-    $contraseña = "";
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $usuario = $_POST["usuario"];
-        $contraseña = $_POST["contrasenia"];
+        $usuario = strip_tags($usuario);
+        $usuario = stripslashes($usuario);
+        $usuario = htmlspecialchars($usuario);
 
-        $datos = getUser($usuario);
-
-        if ($datos) {
-            $contraseñaEncriptada = $datos["contrasenia"];
-            $retorno = password_verify($contraseña, $contraseñaEncriptada);
-            if ($retorno) {
-                echo "la contraseña es correcta";
-            } else {
-                echo "la contraseña es incorrecta.";
-            }
-        } else {
-
-            echo "el usuario o la contraseña es incorrecto.";
+        $contrasenya = $_POST["contrasenya"];
+        $contrasenya = strip_tags($contrasenya);
+        $contrasenya = stripslashes($contrasenya);
+        $contrasenya = htmlspecialchars($contrasenya);
+        
+        $usuarioRegistrado=getUser($usuario);
+        if ($usuarioRegistrado==false) {
+            echo "usuario incorrecto";
+        } else{
+            if(password_verify($contrasenya,$usuarioRegistrado["contrasenya"])){
+                echo "Usuario y contraseña correctas";
+            }else{
+                echo "Usuario y contraseña incorrectas";
+            }    
         }
+        
+        
     }
 
-
-
-    ?>
-
-
-    <form class="form-register" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
-        <h2>Banco2</h2>
-        <div>
-            <input type="text" name="usuario" placeholder="NombreUsuario" required>
-            <input type="password" name="contrasenia" placeholder="Contrasenia" required>
-            <input type="submit" value="Registrar">
+?>
+<body>
+    <form class="form-register" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>"  method="POST">
+        <h2 class="form-titulo">Características:</h2>
+        <div class="contenedor-inputs">
+            <input type="text" name="usuario" placeholder="Usuario" class="input-100" required>
+            <input type="password" name="contrasenya" placeholder="Contraseña" class="input-100" required>
+            <input type="submit" value="Registrar" class="btn-enviar" >
         </div>
     </form>
-
 </body>
 
 </html>

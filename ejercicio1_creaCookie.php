@@ -7,4 +7,5 @@ $age = 21;
 $caducidad = time() + 10800;
 setcookie("nombre", $name, $caducidad, "/");
 setcookie("edad", $age, $caducidad, "/");
+session_id()
 ?>

@@ -14,16 +14,16 @@
     include "ejercicio5BBDD.php";
 
     $usuario = "";
-    $contraseña = "";
+    $contrasenya = "";
     $cuenta = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $usuario = $_POST["usuario"];
-        $contraseña = $_POST["contraseña"];
-        $contraseña = password_hash($contraseña, PASSWORD_DEFAULT);
+        $contrasenya = $_POST["contrasenya"];
+        $contrasenya = password_hash($contrasenya, PASSWORD_DEFAULT);
         $cuenta = $_POST["cuenta"];
 
-        insertaElemento($usuario, $contraseña, $cuenta);
+        insertaElemento($usuario, $contrasenya, $cuenta,"usuario");
     }
 
     ?>
@@ -32,7 +32,7 @@
         <h2>Banco</h2>
         <div>
             <input type="text" name="usuario" placeholder="NombreUsuario" required>
-            <input type="password" name="contraseña" placeholder="Contraseña" required>
+            <input type="password" name="contrasenya" placeholder="Contraseña" required>
             <input type="text" name="cuenta" placeholder="CuentaBancaria" required>
             <input type="submit" value="Registrar">
         </div>

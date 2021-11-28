@@ -1,7 +1,7 @@
 <?php
 
 $servidor = "localhost";
-$baseDatos = "Tema5";
+$baseDatos = "tema5";
 $user = "developer";
 $pass = "developer";
 
@@ -13,7 +13,7 @@ function insertaElemento($NombreUsuario, $Contraseña, $CuentaBancaria, $Perfil)
         $conexion = new PDO('mysql:host=' . $GLOBALS["servidor"] . ';dbname=' . $GLOBALS["baseDatos"], $GLOBALS["user"], $GLOBALS["pass"]);
 
 
-        $consulta = $conexion->prepare("INSERT INTO banco(NombreUsuario, Contraseña, CuentaBancaria, Perfil) VALUES (?,?,?,?)");
+        $consulta = $conexion->prepare("INSERT INTO banco (NombreUsuario, contrasenya, CuentaBancaria, Perfil) VALUES (?,?,?,?)");
         $consulta->bindParam(1, $NombreUsuario);
         $consulta->bindParam(2, $Contraseña);
         $consulta->bindParam(3, $CuentaBancaria);
@@ -28,5 +28,5 @@ function insertaElemento($NombreUsuario, $Contraseña, $CuentaBancaria, $Perfil)
     $conexion = null;
 }
 
-insertaElemento("marini","dfasgyrd","FDSGHRAE", "admin");
+//insertaElemento("marini2","dfasgyrd","FDSGHRAE", "admin");
 ?>
